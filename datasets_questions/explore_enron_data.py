@@ -86,18 +86,16 @@ for person_name in enron_data:
 		no_payments_count += 1
 print float(no_payments_count)/len(enron_data) * 100
 
-#How many POIs in the E+F dataset have NaN for their total payments? What percentage of POIs as a whole is this? 
-no_POIs_count = 0 
-for person_name in enron_data:
-	if enron_data[person_name]['poi'] == 'NaN':
-		no_POIs_count += 1
-print float(no_POIs_count)/len(enron_data) * 100
-
 
 # What percentage of POIs in the data have "NaN" for their total payments?
 POIs = dict((key,value) for key, value in enron_data.items() if value['poi'] == True)
 number_POIs = len(POIs)
-no_total_payments = len(dict((key, value) for key, value in POIs.items() if value["total_payments"] == 'NaN'))
+print number_POIs
+
+no_total_payments = 0 
+for person_name in POIs:
+	if POIs[person_name]['total_payments'] != 'NaN':
+		no_total_payments += 1
 print float(no_total_payments)/number_POIs * 100
 
 # What is the new number of people with NaN total_payments?
